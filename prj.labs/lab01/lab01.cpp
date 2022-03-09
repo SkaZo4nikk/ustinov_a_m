@@ -13,14 +13,14 @@ int main() {
 		{
 			i_1.at<uint8_t>(j, i) = color;
 		}
-		if (i % 3 == 0) color++;
+		if (i % 3 == 0 && color < 255) color++;
 	}
 
 	cv::Mat g_1;
 	i_1.convertTo(g_1, CV_32F, 1.0 / 255.0);
 	{
 		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-		cv::pow(g_1, 2.3, g_1);
+		cv::pow(g_1, 2.2, g_1);
 		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 		std::cout << "Elapsed Time = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[ms]" << std::endl;
 	}
