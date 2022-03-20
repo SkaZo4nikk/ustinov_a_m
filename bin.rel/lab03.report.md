@@ -1,6 +1,6 @@
 ## Работа 3. Яркостные преобразования
 автор: Полевой Д.В.
-дата: 2022-03-13T13:01:15
+дата: 2022-03-15T22:44:42
 
 <!-- url: https://gitlab.com/2021-misis-spring/polevoy_d_v/-/tree/master/prj.labs/lab03 -->
 
@@ -32,63 +32,63 @@
 ### Текст программы
 
 ```cpp
+#include "opencv2/core/core.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
 #include <iostream>
-#include <opencv2/opencv.hpp>
 
-cv::Mat makeMosaic(cv::Mat src) {
-    std::vector<cv::Mat> channels;
-    cv::split(src, channels);
-    cv::Mat salt = cv::Mat::zeros(src.size(), CV_8U);
+void NotTrivial(cv::Mat image) {
+	for (int i = 0; i < image.rows; i++)
+		for (int j = 0; j < image.cols; j++)
+			image.at<uint8_t>(j, i) = std::pow(image.at<uint8_t>(j, i), 2) / 510;
 
-    cv::Mat B, G, R;
-    cv::merge(std::vector<cv::Mat>{channels[0], salt, salt}, B);
-    cv::merge(std::vector<cv::Mat>{salt, channels[1], salt}, G);
-    cv::merge(std::vector<cv::Mat>{salt, salt, channels[2]}, R);
-
-    cv::hconcat(src, R, src);
-    cv::hconcat(G, B, G);
-    cv::vconcat(src, G, src);
-    return src;
 }
 
-cv::Mat makeHist(const cv::Mat& src) {
-    cv::Mat gray;
-    std::vector<int> brightness(256, 0);
-    cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
-    for (int i = 0; i < gray.cols; i++) {
-        for (int j = 0; j < gray.rows; j++) {
-            ++brightness[gray.at<uint8_t>(j, i)];
-        }
-    }
-
-    int max_point = *std::max_element(brightness.begin(), brightness.end());
-    cv::Mat ans(256, 512, CV_8U, cv::Scalar(255));
-    for (int i = 0; i < 256; i++) {
-        int h = brightness[i] * 250 / max_point;
-        cv::Point pt1(i * 2, 255 - h);
-        cv::Point pt2(i * 2 + 1, 255);
-        cv::rectangle(ans, pt1, pt2, 0);
-    }
-    return ans;
+void FuncNotTrivial(int* arr) {
+	for (int i = 0; i < 256; i++) {
+		arr[i] = std::pow(i, 2) / 510;
+	}
 }
 
 int main() {
-    const std::string path = "C:/ustinov_a_m/data/cross_0256x0256.png";
-    cv::Mat cross_0256x0256 = cv::imread(path);
-    cv::Mat resized_image;
-    std::vector<cv::Mat> channels, resized_channels;
+	
+	cv::Mat imgPng = cv::imread("../../../data/cross_0256x0256.png");
 
-    cv::imwrite("cross_0256x0256_025.jpg", cross_0256x0256, { cv::IMWRITE_JPEG_QUALITY, 25 });
-    resized_image = cv::imread("cross_0256x0256_025.jpg");
+	if (imgPng.empty()) {
+		std::cout << "Path not found" << std::endl;
+	}
+	else {
+		std::cout << "Path found" << std::endl;
+	}
 
-    cv::Mat mosaic = makeMosaic(cross_0256x0256), resized_mosaic = makeMosaic(resized_image);
-    cv::Mat hists = makeHist(cross_0256x0256);
-    cv::hconcat(hists, makeHist(resized_image), hists);
+	cv::imwrite("lab03_rgb.png", imgPng);
+	cv::imshow("lab03_rgb.png", imgPng);
 
-    cv::imwrite("./source_mosaic.png", mosaic);
-    cv::imwrite("./resized_mosaic.png", resized_mosaic);
-    cv::imwrite("./resized_source.png", resized_image);
-    cv::imwrite("./hists.png", hists);
-    cv::waitKey(0);
-}
+	cv::Mat Gray = imgPng.clone();
+	cv::cvtColor(imgPng, Gray, cv::COLOR_BGR2GRAY);
+	cv::imwrite("lab03_gre.png", Gray);
+
+	cv::Mat greyscale = Gray.clone();
+	NotTrivial(greyscale);
+	cv::imwrite("lab03_gre_res.png", greyscale);
+
+	cv::Mat channels[3];
+	cv::split(imgPng, channels);
+	NotTrivial(channels[0]);
+	NotTrivial(channels[1]);
+	NotTrivial(channels[2]);
+	cv::Mat mergeImage;
+	cv::merge(channels, 3, mergeImage);
+	cv::imwrite("lab03_rgb_res.png", mergeImage);
+
+	cv::Mat graph(512, 512, CV_8SC3, cv::Scalar(255, 255, 255));
+	int LUT[256];
+	FuncNotTrivial(LUT);
+	for (int i = 0; i < 255; i++) {
+		cv::line(graph, cv::Point(2 * i, graph.rows - 2 * LUT[i]), cv::Point(2 * (i + 1), graph.rows - 2 * LUT[i + 1]), cv::Scalar(0, 0, 0));
+	}
+	cv::imwrite("lab03_viz_func.png", graph);
+
+	cv::waitKey(0);
+	}
 ```

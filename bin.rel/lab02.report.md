@@ -1,6 +1,6 @@
 ## Работа 2. Исследование каналов и JPEG-сжатия
 автор: Полевой Д.В.
-дата: 2022-03-13T13:01:15
+дата: 2022-03-15T22:44:42
 
 <!-- url: https://gitlab.com/2021-misis-spring/polevoy_d_v/-/tree/master/prj.labs/lab02 -->
 

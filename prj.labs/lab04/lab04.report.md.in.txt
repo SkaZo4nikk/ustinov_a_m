@@ -1,0 +1,336 @@
+## Работа 4. Детектирование границ документов на кадрах видео
+автор: Устинов А.М.
+дата: @time_stemp@
+
+Github: https://github.com/SkaZo4nikk/ustinov_a_m/tree/main/prj.labs/lab04
+
+### Задание
+0. текст, иллюстрации и подписи отчета придумываем самостоятельно
+1. самостоятельно снимаем видео смартфоном
+- объект съемки - купюры (рубли разного номинала), расправленные и лежащие на поверхности (проективно искаженны прямоугольник)
+- количество роликов - от 5 шт.
+- длительность - 5-7 сек
+- условия съемки разные
+2. извлекаем по 3 кадра из каждого ролика (делим кол-во кадров на 5 и берем каждый с индеком 2/5,3/5,4/5)
+3. цветоредуцируем изображения
+4. бинаризцем изображения
+5. морфологически обрабатываем изображения
+6. выделяем основную компоненту связности
+7. руками изготавливаем маски (идеальная зона купюры)
+8. оцениваем качество выделение зоны и анализируем ошибки
+
+### Результаты
+
+- Структура нумерации рисунков следуюшая: i.j.k, где i – индекс купюры, j – номер этапа, k – номер кадра купюры 
+- Бинаризация проводилась с пороговым значением *120*
+
+
+### 10 рублей
+
+|![](photo/10rubls_Initial_1.png)|![](photo/10rubls_Initial_2.png)|![](photo/10rubls_Initial_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.1.1 Оригинальное изображение|Рис. 1.1.2 Оригинальное изображение|Рис. 1.1.3 Оригинальное изображение|
+
+|![](photo/10rubls_Gray_1.png)|![](photo/10rubls_Gray_2.png)|![](photo/10rubls_Gray_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.2.1 Изображение в серых тонах|Рис. 1.2.2 Изображение в серых тонах|Рис. 1.2.3 Изображение в серых тонах|
+
+|![](photo/10rubls_Binarization_1.png)|![](photo/10rubls_Binarization_2.png)|![](photo/10rubls_Binarization_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.3.1 Бинаризованное изображение|Рис. 1.3.2 Бинаризованное изображение|Рис. 1.3.3 Бинаризованное изображение|
+
+  
+
+|![](photo/10rubls_Morhology_1.png)|![](photo/10rubls_Morhology_2.png)|![](photo/10rubls_Morhology_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.4.1 Изображение после морфологии|Рис. 1.4.2 Изображение после морфологии|Рис. 1.4.3 Изображение после морфологии|
+
+|![](photo/10rubls_Components_1.png)|![](photo/10rubls_Components_2.png)|![](photo/10rubls_Components_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.5.1 Изображение после выделения основной компоненты связности|Рис. 1.5.2 Изображение после выделения основной связной компоненты|Рис. 1.5.3 Изображение после выделения основной связной компоненты|
+
+|![](photo/10rubls_Morphology2_1.png)|![](photo/10rubls_Morphology2_2.png)|![](photo/10rubls_Morphology2_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.6.1 Изображение после второй морфологии|Рис. 1.6.2 Изображение после второй морфологии|Рис. 1.6.3 Изображение после второй морфологии|
+
+|![](../../../data/EtalonMask/10rubls_EtalonMask_1.png)|![](../../../data/EtalonMask/10rubls_EtalonMask_2.png)|![](../../../data/EtalonMask/10rubls_EtalonMask_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 1.7.1 Идеальная маска для данного изображения|Рис. 1.7.2 Идеальная маска для данного изображения|Рис. 1.7.3 Идеальная маска для данного изображения|
+
+Оценка качества:
+1) Similarity of 10rubls  = 96.7945%
+2) Similarity of 10rubls  = 96.8044%
+3) Similarity of 10rubls  = 96.8218%
+
+### 50 рублей
+
+|![](photo/50rubls_Initial_1.png)|![](photo/50rubls_Initial_2.png)|![](photo/50rubls_Initial_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.1.1 Оригинальное изображение|Рис. 2.1.2 Оригинальное изображение|Рис. 2.1.3 Оригинальное изображение|
+
+|![](photo/50rubls_Gray_1.png)|![](photo/50rubls_Gray_2.png)|![](photo/50rubls_Gray_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.2.1 Изображение в серых тонах|Рис. 2.2.2 Изображение в серых тонах|Рис. 2.2.3 Изображение в серых тонах|
+
+|![](photo/50rubls_Binarization_1.png)|![](photo/50rubls_Binarization_2.png)|![](photo/50rubls_Binarization_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.3.1 Бинаризованное изображение|Рис. 2.3.2 Бинаризованное изображение|Рис. 2.3.3 Бинаризованное изображение|
+
+|![](photo/50rubls_Morhology_1.png)|![](photo/50rubls_Morhology_2.png)|![](photo/50rubls_Morhology_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.4.1 Изображение после морфологии|Рис. 2.4.2 Изображение после морфологии|Рис. 2.4.3 Изображение после морфологии|
+
+|![](photo/50rubls_Components_1.png)|![](photo/50rubls_Components_2.png)|![](photo/50rubls_Components_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.5.1 Изображение после выделения основной компоненты связности|Рис. 2.5.2 Изображение после выделения основной связной компоненты|Рис. 2.5.3 Изображение после выделения основной связной компоненты|
+
+|![](photo/50rubls_Morphology2_1.png)|![](photo/50rubls_Morphology2_2.png)|![](photo/50rubls_Morphology2_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.6.1 Изображение после второй морфологии|Рис. 2.6.2 Изображение после второй морфологии|Рис. 2.6.3 Изображение после второй морфологии|
+
+|![](../../../data/EtalonMask/50rubls_EtalonMask_1.png)|![](../../../data/EtalonMask/50rubls_EtalonMask_2.png)|![](../../../data/EtalonMask/50rubls_EtalonMask_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 2.7.1 Идеальная маска для данного изображения|Рис. 2.7.2 Идеальная маска для данного изображения|Рис. 2.7.3 Идеальная маска для данного изображения|
+
+Оценка качества:
+1) Similarity of 50rubls  = 97.4187%
+2) Similarity of 50rubls  = 97.3964%
+3) Similarity of 50rubls  = 97.4229%
+
+### 100 рублей
+
+|![](photo/100rubls_Initial_1.png)|![](photo/100rubls_Initial_2.png)|![](photo/100rubls_Initial_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.1.1 Оригинальное изображение|Рис. 3.1.2 Оригинальное изображение|Рис. 3.1.3 Оригинальное изображение|
+
+|![](photo/100rubls_Gray_1.png)|![](photo/100rubls_Gray_2.png)|![](photo/100rubls_Gray_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.2.1 Изображение в серых тонах|Рис. 3.2.2 Изображение в серых тонах|Рис. 3.2.3 Изображение в серых тонах|
+
+|![](photo/100rubls_Binarization_1.png)|![](photo/100rubls_Binarization_2.png)|![](photo/100rubls_Binarization_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.3.1 Бинаризованное изображение|Рис. 3.3.2 Бинаризованное изображение|Рис. 3.3.3 Бинаризованное изображение|
+
+|![](photo/100rubls_Morhology_1.png)|![](photo/100rubls_Morhology_2.png)|![](photo/100rubls_Morhology_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.4.1 Изображение после морфологии|Рис. 3.4.2 Изображение после морфологии|Рис. 3.4.3 Изображение после морфологии|
+
+|![](photo/100rubls_Components_1.png)|![](photo/100rubls_Components_2.png)|![](photo/100rubls_Components_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.5.1 Изображение после выделения основной компоненты связности|Рис. 3.5.2 Изображение после выделения основной связной компоненты|Рис. 3.5.3 Изображение после выделения основной связной компоненты|
+
+|![](photo/100rubls_Morphology2_1.png)|![](photo/100rubls_Morphology2_2.png)|![](photo/100rubls_Morphology2_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.6.1 Изображение после второй морфологии|Рис. 3.6.2 Изображение после второй морфологии|Рис. 3.6.3 Изображение после второй морфологии|
+
+|![](../../../data/EtalonMask/100rubls_EtalonMask_1.png)|![](../../../data/EtalonMask/100rubls_EtalonMask_2.png)|![](../../../data/EtalonMask/100rubls_EtalonMask_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 3.7.1 Идеальная маска для данного изображения|Рис. 3.7.2 Идеальная маска для данного изображения|Рис. 3.7.3 Идеальная маска для данного изображения|
+
+Оценка качества:
+1) Similarity of 100rubls  = 96.6393%
+2) Similarity of 100rubls  = 97.2769%
+3) Similarity of 100rubls  = 96.4714%
+
+### 1000 рублей 
+
+|![](photo/1000rubls_Initial_1.png)|![](photo/1000rubls_Initial_2.png)|![](photo/1000rubls_Initial_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.1.1 Оригинальное изображение|Рис. 4.1.2 Оригинальное изображение|Рис. 4.1.3 Оригинальное изображение|
+
+|![](photo/1000rubls_Gray_1.png)|![](photo/1000rubls_Gray_2.png)|![](photo/1000rubls_Gray_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.2.1 Изображение в серых тонах|Рис. 4.2.2 Изображение в серых тонах|Рис. 4.2.3 Изображение в серых тонах|
+
+|![](photo/1000rubls_Binarization_1.png)|![](photo/1000rubls_Binarization_2.png)|![](photo/1000rubls_Binarization_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.3.1 Бинаризованное изображение|Рис. 4.3.2 Бинаризованное изображение|Рис. 4.3.3 Бинаризованное изображение|
+
+|![](photo/1000rubls_Morhology_1.png)|![](photo/1000rubls_Morhology_2.png)|![](photo/1000rubls_Morhology_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.4.1 Изображение после морфологии|Рис. 4.4.2 Изображение после морфологии|Рис. 4.4.3 Изображение после морфологии|
+
+|![](photo/1000rubls_Components_1.png)|![](photo/1000rubls_Components_2.png)|![](photo/1000rubls_Components_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.5.1 Изображение после выделения основной компоненты связности|Рис. 4.5.2 Изображение после выделения основной связной компоненты|Рис. 4.5.3 Изображение после выделения основной связной компоненты|
+
+|![](photo/1000rubls_Morphology2_1.png)|![](photo/1000rubls_Morphology2_2.png)|![](photo/1000rubls_Morphology2_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.6.1 Изображение после второй морфологии|Рис. 4.6.2 Изображение после второй морфологии|Рис. 4.6.3 Изображение после второй морфологии|
+
+|![](../../../data/EtalonMask/1000rubls_EtalonMask_1.png)|![](../../../data/EtalonMask/1000rubls_EtalonMask_2.png)|![](../../../data/EtalonMask/1000rubls_EtalonMask_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 4.7.1 Идеальная маска для данного изображения|Рис. 4.7.2 Идеальная маска для данного изображения|Рис. 4.7.3 Идеальная маска для данного изображения|
+
+Оценка качества:
+1) Similarity of 1000rubls  = 98.846%
+2) Similarity of 1000rubls  = 97.9247%
+3) Similarity of 1000rubls  = 98.8118%
+
+### 5000 рублей
+
+|![](photo/5000rubls_Initial_1.png)|![](photo/5000rubls_Initial_2.png)|![](photo/5000rubls_Initial_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.1.1 Оригинальное изображение|Рис. 5.1.2 Оригинальное изображение|Рис. 5.1.3 Оригинальное изображение|
+
+|![](photo/5000rubls_Gray_1.png)|![](photo/5000rubls_Gray_2.png)|![](photo/5000rubls_Gray_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.2.1 Изображение в серых тонах|Рис. 5.2.2 Изображение в серых тонах|Рис. 5.2.3 Изображение в серых тонах|
+
+|![](photo/5000rubls_Binarization_1.png)|![](photo/5000rubls_Binarization_2.png)|![](photo/5000rubls_Binarization_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.3.1 Бинаризованное изображение|Рис. 5.3.2 Бинаризованное изображение|Рис. 5.3.3 Бинаризованное изображение|
+
+|![](photo/5000rubls_Morhology_1.png)|![](photo/5000rubls_Morhology_2.png)|![](photo/5000rubls_Morhology_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.4.1 Изображение после морфологии|Рис. 5.4.2 Изображение после морфологии|Рис. 5.4.3 Изображение после морфологии|
+
+|![](photo/5000rubls_Components_1.png)|![](photo/5000rubls_Components_2.png)|![](photo/5000rubls_Components_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.5.1 Изображение после выделения основной компоненты связности|Рис. 5.5.2 Изображение после выделения основной связной компоненты|Рис. 5.5.3 Изображение после выделения основной связной компоненты|
+
+|![](photo/5000rubls_Morphology2_1.png)|![](photo/5000rubls_Morphology2_2.png)|![](photo/5000rubls_Morphology2_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.6.1 Изображение после второй морфологии|Рис. 5.6.2 Изображение после второй морфологии|Рис. 5.6.3 Изображение после второй морфологии|
+
+|![](../../../data/EtalonMask/5000rubls_EtalonMask_1.png)|![](../../../data/EtalonMask/5000rubls_EtalonMask_2.png)|![](../../../data/EtalonMask/5000rubls_EtalonMask_3.png)|
+|-----------------------------|-----------------------------|---------------------------|
+|Рис. 5.7.1 Идеальная маска для данного изображения|Рис. 5.7.2 Идеальная маска для данного изображения|Рис. 5.7.3 Идеальная маска для данного изображения|
+
+Оценка качества:
+1) Similarity of 5000rubls  = 99.0465%
+2) Similarity of 5000rubls  = 99.0218%
+3) Similarity of 5000rubls  = 99.1417%
+
+### Текст программы
+
+```cpp
+#include <opencv2/opencv.hpp>
+#include <opencv2/videoio.hpp>
+#include <iostream>
+
+void func(std::string Path) {
+	cv::VideoCapture video(Path + ".mp4");
+	if (!video.isOpened()) {
+		std::cout << "Error opening video stream or file" << std::endl;
+	}
+
+	Path = Path.substr(14);
+	
+	int nframes =  video.get(cv::CAP_PROP_FRAME_COUNT);
+	cv::Mat frame[3];
+	int FrameNumber;
+
+	for (int i = 0; i < 3; i++) {
+		FrameNumber = nframes * (i + 2) / 5;
+		video.set(cv::CAP_PROP_POS_FRAMES, FrameNumber);
+		video >> frame[i];
+		cv::imwrite("photo/" + Path + "_Initial" + "_" + std::to_string(i + 1) + ".png", frame[i]);
+		
+		cv::Mat GrayFrame = frame[i];
+		cv::cvtColor(GrayFrame, GrayFrame, cv::COLOR_BGR2GRAY);
+		cv::imwrite("photo/" + Path + "_Gray" + "_" + std::to_string(i + 1) + ".png", GrayFrame);
+
+		cv::Mat Binarization;
+		cv::threshold(GrayFrame, Binarization, 120, 255, cv::THRESH_BINARY);
+
+		double PercentWhitePixel = 0.0;
+		for (int j = 0; j < Binarization.rows; j++) {
+			for (int k = 0; k < Binarization.cols; k++) {
+				if (Binarization.at<uint8_t>(j, k) == 255) {
+					PercentWhitePixel++;
+				}
+			}
+		}
+		
+		PercentWhitePixel = PercentWhitePixel / (Binarization.cols * Binarization.rows) * 100;
+		//std::cout << Path + " " << PercentWhitePixel << std::endl;
+
+		if (PercentWhitePixel >= 50) {
+			cv::threshold(Binarization, Binarization, 70, 255, cv::THRESH_BINARY_INV);
+		}
+		cv::imwrite("photo/" + Path + "_Binarization" + "_" + std::to_string(i + 1) + ".png", Binarization);
+
+		cv::Mat Morphology;
+		cv::morphologyEx(Binarization, Morphology, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)));
+		cv::morphologyEx(Morphology, Morphology, cv::MORPH_OPEN, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)));
+		
+		cv::Mat LabelImage(Morphology.size(), CV_32S), stats, centroids;
+		int nLabels = cv::connectedComponentsWithStats(Morphology, LabelImage, stats, centroids, 8, CV_32S);
+		//std::cout << nLabels << std::endl;
+
+		if (nLabels > 30) {
+			cv::morphologyEx(Morphology, Morphology, cv::MORPH_OPEN, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(10, 10)));
+			cv::morphologyEx(Morphology, Morphology, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(10, 10)));
+			cv::morphologyEx(Morphology, Morphology, cv::MORPH_ERODE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(30, 15)));
+			cv::morphologyEx(Morphology, Morphology, cv::MORPH_OPEN, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(50, 25)));
+		}
+		cv::morphologyEx(Morphology, Morphology, cv::MORPH_DILATE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(30, 20)));
+		cv::imwrite("photo/" + Path + "_Morhology" + "_" + std::to_string(i + 1) + ".png", Morphology);
+
+		nLabels = cv::connectedComponentsWithStats(Morphology, LabelImage, stats, centroids, 8, CV_32S);
+		
+		/*for (int j = 0; j < nLabels; j++) {
+			std::cout << j << " " << stats.at<int>(j, cv::CC_STAT_AREA) << std::endl;
+		}
+		*/
+
+		int MaxArea = 0;
+		int MaxLabel = 1;
+		
+		//MaxComponents
+		for (int j = 1; j < nLabels; j++) {
+			if (MaxArea < stats.at<int>(j, cv::CC_STAT_AREA)) {
+				MaxArea = stats.at<int>(j, cv::CC_STAT_AREA);
+				MaxLabel = j;
+			}
+		}
+
+		cv::Mat Components(Morphology.size(), CV_8UC1);
+		Components = 0;
+
+		for (int j = 0; j < Components.rows; j++) {
+			for (int k = 0; k < Components.cols; k++) {
+				if (MaxLabel == LabelImage.at<int>(j, k)) {
+					Components.at<uint8_t>(j, k) = 255;
+				}
+			}
+			
+		}
+		cv::imwrite("photo/" + Path + "_Components" + "_" + std::to_string(i + 1) + ".png", Components);
+
+		cv::Mat Morphology2;
+		cv::morphologyEx(Components, Morphology2, cv::MORPH_CLOSE, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(200, 150)));
+		cv::imwrite("photo/" + Path + "_Morphology2" + "_" + std::to_string(i + 1) + ".png", Morphology2);
+
+		cv::Mat EtalonMask;
+		EtalonMask = cv::imread("../../../data/EtalonMask/" + Path + "_EtalonMask_" + std::to_string(i + 1) + ".png");
+		cv::cvtColor(EtalonMask, EtalonMask, cv::COLOR_BGR2GRAY);
+		
+		double Count = 0;
+
+		for (int j = 0; j < EtalonMask.rows; j++) {
+			for (int k = 0; k < EtalonMask.cols; k++) {
+				if (EtalonMask.at<uint8_t>(j, k) == Morphology2.at<uint8_t>(j, k)) {
+					Count++;
+				}
+		
+			}
+		}
+		
+		//std::cout << EtalonMask.type();
+		//std::cout << Morphology2.type();
+
+		std::cout << i + 1 << ") " << "Similarity of " + Path + " " << " = " << Count / (Morphology2.rows * Morphology2.cols) * 100 << "%" << std::endl;
+
+	}
+}
+
+int main() {
+	func("../../../data/10rubls");
+	func("../../../data/50rubls");
+	func("../../../data/100rubls");
+	func("../../../data/1000rubls");
+	func("../../../data/5000rubls");
+}
+```

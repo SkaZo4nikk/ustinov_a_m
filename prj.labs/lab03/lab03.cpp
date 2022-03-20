@@ -28,6 +28,7 @@ int main() {
 	}
 
 	cv::imwrite("lab03_rgb.png", imgPng);
+	cv::imshow("lab03_rgb.png", imgPng);
 
 	cv::Mat Gray = imgPng.clone();
 	cv::cvtColor(imgPng, Gray, cv::COLOR_BGR2GRAY);
