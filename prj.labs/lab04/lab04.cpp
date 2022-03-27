@@ -116,6 +116,27 @@ void func(std::string Path) {
 
 		std::cout << i + 1 << ") " << "Similarity of " + Path + " " << " = " << Count / (Morphology2.rows * Morphology2.cols) * 100 << "%" << std::endl;
 
+		cv::Mat MaskOverOrg(Morphology2.size(), CV_8UC3);
+
+		for (int j = 0; j < Morphology2.rows; j++) {
+			for (int k = 0; k < Morphology2.cols; k++) {
+				if ((EtalonMask.at<uint8_t>(j, k) == 0) && (Morphology2.at<uint8_t>(j, k) == 0)) {
+					MaskOverOrg.at<cv::Vec3b>(j, k) = cv::Vec3b(0, 0, 0);
+				}
+				else if ((EtalonMask.at<uint8_t>(j, k) == 0) && (Morphology2.at<uint8_t>(j, k) == 255)) {
+					MaskOverOrg.at<cv::Vec3b>(j, k) = cv::Vec3b(0, 0, 255);
+				}
+				else if ((EtalonMask.at<uint8_t>(j, k) == 255) && (Morphology2.at<uint8_t>(j, k) == 0)) {
+					MaskOverOrg.at<cv::Vec3b>(j, k) = cv::Vec3b(0, 255, 0);
+				}
+				else if ((EtalonMask.at<uint8_t>(j, k) == 255) && (Morphology2.at<uint8_t>(j, k) == 255)) {
+					MaskOverOrg.at<cv::Vec3b>(j, k) = cv::Vec3b(255, 255, 255);
+				}
+			}
+		}
+
+		cv::addWeighted(frame[i], 0.5, MaskOverOrg, 0.5, 0.0, MaskOverOrg);
+		cv::imwrite("photo/" + Path + "_MaskOverOrg_" + std::to_string(i + 1) + ".png", MaskOverOrg);
 	}
 }
 
